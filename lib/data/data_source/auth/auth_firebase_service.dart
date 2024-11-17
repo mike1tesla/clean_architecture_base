@@ -1,5 +1,6 @@
 // dependency inversion - Trừu tượng hóa data_source nên repository sẽ không phu thuộc vào các Service
 // Làm việc trực tiếp với FirebaseService
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smart_iot/data/models/auth/create_user_req.dart';
@@ -36,10 +37,20 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
   @override
   Future<Either> signup(CreateUserReq createUserReq) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      // Đăng kí người dùng FirebaseAuth
+      var data = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: createUserReq.email,
         password: createUserReq.password,
       );
+
+      // Lưu thông tin người dùng vào collection FirebaseFirestore
+      FirebaseFirestore.instance.collection("Users").add(
+        {
+          'name' : createUserReq.fullName,
+          'email' : data.user?.email,
+        }
+      );
+
       return const Right("Signup was successful");
     } on FirebaseAuthException catch (e) {
       String message = "Signup Failed";

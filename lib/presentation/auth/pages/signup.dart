@@ -8,9 +8,9 @@ import 'package:smart_iot/core/configs/assets/app_vectors.dart';
 import 'package:smart_iot/data/models/auth/create_user_req.dart';
 import 'package:smart_iot/domain/usecase/auth/signup.dart';
 import 'package:smart_iot/presentation/auth/pages/signin.dart';
-import 'package:smart_iot/presentation/root/pages/root.dart';
 
 import '../../../service_locator.dart';
+import '../../home/pages/home.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({super.key});
@@ -54,7 +54,7 @@ class SignupPage extends StatelessWidget {
                   },
                   (r) {
                     Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => const RootPage()),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                       (route) => false,
                     );
                   },

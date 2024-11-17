@@ -9,7 +9,7 @@ import '../../../common/widgets/appbar/app_bar.dart';
 import '../../../common/widgets/button/basic_app_button.dart';
 import '../../../core/configs/assets/app_vectors.dart';
 import '../../../service_locator.dart';
-import '../../root/pages/root.dart';
+import '../../home/pages/home.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({super.key});
@@ -49,7 +49,7 @@ class SignInPage extends StatelessWidget {
                   },
                   (r) {
                     Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => const RootPage()),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                       (route) => false,
                     );
                   },
