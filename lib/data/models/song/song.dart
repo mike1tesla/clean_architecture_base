@@ -11,7 +11,14 @@ class SongModel {
   SongModel.fromJson(Map<String, dynamic> data) {
     title = data['title'];
     artist = data['artist'];
-    duration = data['duration'];
+
+    // Kiểm tra và chuyển đổi duration sang kiểu num
+    var rawDuration = data['duration'];
+    if (rawDuration is String) {
+      duration = num.tryParse(rawDuration);
+    } else if (rawDuration is num) {
+      duration = rawDuration;
+    }
     releaseDate = data['releaseDate'];
   }
 }

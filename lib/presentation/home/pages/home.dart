@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:smart_iot/common/helpers/is_dark_mode.dart';
 import 'package:smart_iot/core/configs/assets/app_images.dart';
 import 'package:smart_iot/core/configs/theme/app_colors.dart';
+import 'package:smart_iot/presentation/home/widgets/news_songs.dart';
 
 import '../../../common/widgets/appbar/app_bar.dart';
 import '../../../core/configs/assets/app_vectors.dart';
@@ -41,6 +42,19 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           children: [
             _homeTopCard(),
             _tabs(),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              height: 230,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  const NewsSongs(),
+                  Container(),
+                  Container(),
+                  Container(),
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -53,14 +67,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         height: 150,
         child: Stack(
           children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: SvgPicture.asset(AppVectors.homeTopCard),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Image.asset(AppImages.homeArtist),
-            ),
+            Align(alignment: Alignment.bottomCenter, child: SvgPicture.asset(AppVectors.homeTopCard)),
+            Align(alignment: Alignment.bottomCenter, child: Image.asset(AppImages.homeArtist)),
           ],
         ),
       ),
@@ -74,14 +82,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       physics: const ClampingScrollPhysics(),
       tabAlignment: TabAlignment.center,
       labelColor: context.isDarkMode ? Colors.white : Colors.black,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       indicatorColor: AppColors.primary,
-      indicatorWeight: 3,
+      dividerColor: Colors.transparent,
       tabs: const [
-        Text("News", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),),
-        Text("Video", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),),
-        Text("Artists", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),),
-        Text("Podcast", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),),
+        Text("News", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+        Text("Video", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+        Text("Artists", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+        Text("Podcast", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
       ],
     );
   }

@@ -10,5 +10,4 @@ class SongRepositoryImpl extends SongsRepository {
   Future<Either> getNewsSongs() async {
     return await sl<SongFirebaseService>().getNewsSongs();
   }
-
 }
