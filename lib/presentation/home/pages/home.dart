@@ -9,6 +9,7 @@ import 'package:smart_iot/presentation/home/widgets/news_songs.dart';
 
 import '../../../common/widgets/appbar/app_bar.dart';
 import '../../../core/configs/assets/app_vectors.dart';
+import '../widgets/play_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -37,13 +38,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ),
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _homeTopCard(),
             _tabs(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
+            SizedBox(
               height: 230,
               child: TabBarView(
                 controller: _tabController,
@@ -54,7 +55,9 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   Container(),
                 ],
               ),
-            )
+            ),
+            const SizedBox(height: 20),
+            const PlayList()
           ],
         ),
       ),
@@ -82,7 +85,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       physics: const ClampingScrollPhysics(),
       tabAlignment: TabAlignment.center,
       labelColor: context.isDarkMode ? Colors.white : Colors.black,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 16),
       indicatorColor: AppColors.primary,
       dividerColor: Colors.transparent,
       tabs: const [

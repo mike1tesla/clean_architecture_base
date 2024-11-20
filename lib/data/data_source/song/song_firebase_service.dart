@@ -5,6 +5,7 @@ import 'package:smart_iot/domain/entities/song/song.dart';
 
 abstract class SongFirebaseService {
   Future<Either> getNewsSongs();
+  Future<Either> getPlayList();
 }
 
 class SongFirebaseServiceImpl extends SongFirebaseService {
@@ -17,6 +18,27 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
               .orderBy('releaseDate', descending: true)
               .limit(3)
               .get();
+      // Chuyển đổi từ docs songJson -> songModel -> songEntity
+      for (var element in data.docs) {
+        var songModel = SongModel.fromJson(element.data());
+        songs.add(songModel.toEntity());
+      }
+      print(songs);
+      return Right(songs);
+    } catch (e) {
+      print(e);
+      return const Left("An error occurred, Please try again");
+    }
+  }
+
+  @override
+  Future<Either> getPlayList() async {
+    try {
+      List<SongEntity> songs = [];
+      var data =
+          await FirebaseFirestore.instance.collection('Songs')
+          .orderBy('releaseDate', descending: true)
+          .get();
       // Chuyển đổi từ docs songJson -> songModel -> songEntity
       for (var element in data.docs) {
         var songModel = SongModel.fromJson(element.data());

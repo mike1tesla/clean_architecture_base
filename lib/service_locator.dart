@@ -8,6 +8,7 @@ import 'package:smart_iot/domain/repository/song/song_repo.dart';
 import 'package:smart_iot/domain/usecase/auth/signin.dart';
 import 'package:smart_iot/domain/usecase/auth/signup.dart';
 import 'package:smart_iot/domain/usecase/song/get_news_songs.dart';
+import 'package:smart_iot/domain/usecase/song/get_play_list.dart';
 
 final sl = GetIt.instance;
 
@@ -42,6 +43,10 @@ Future<void> initializeDependencies() async {
 
   sl.registerSingleton<GetNewsSongsUseCase>(
       GetNewsSongsUseCase()
+  );
+
+  sl.registerSingleton<GetPlayListUseCase>(
+      GetPlayListUseCase()
   );
 
 }
