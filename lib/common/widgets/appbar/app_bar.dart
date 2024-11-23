@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget{
   final Widget? title;
   final bool hideBack;
-  const BasicAppBar({super.key, this.title, this.hideBack = false});
+  final Widget? action;
+
+  const BasicAppBar({super.key, this.title, this.hideBack = false, this.action});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,14 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget{
       backgroundColor: Colors.transparent,
       centerTitle: true,
       title: title,
+      actions: [action ?? Container()],
       leading: hideBack ? null : IconButton(
         onPressed: () {
           Navigator.of(context).pop();
         },
         style: IconButton.styleFrom(
           backgroundColor: Colors.grey.withOpacity(0.1),
-          minimumSize: Size(35, 35)
+          minimumSize: const Size(35, 35)
         ),
         icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 15),
       ),

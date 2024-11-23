@@ -7,8 +7,10 @@ import 'package:smart_iot/domain/repository/auth/auth_repo.dart';
 import 'package:smart_iot/domain/repository/song/song_repo.dart';
 import 'package:smart_iot/domain/usecase/auth/signin.dart';
 import 'package:smart_iot/domain/usecase/auth/signup.dart';
+import 'package:smart_iot/domain/usecase/song/add_or_remove_favorite_song.dart';
 import 'package:smart_iot/domain/usecase/song/get_news_songs.dart';
 import 'package:smart_iot/domain/usecase/song/get_play_list.dart';
+import 'package:smart_iot/domain/usecase/song/isFavoritesSong.dart';
 
 final sl = GetIt.instance;
 
@@ -32,7 +34,7 @@ Future<void> initializeDependencies() async {
       SongRepositoryImpl()
   );
 
-  // domain
+  // Domain - Use Case
   sl.registerSingleton<SignupUseCase>(
       SignupUseCase()
   );
@@ -47,6 +49,14 @@ Future<void> initializeDependencies() async {
 
   sl.registerSingleton<GetPlayListUseCase>(
       GetPlayListUseCase()
+  );
+
+  sl.registerSingleton<AddOrRemoveFavoriteSongUseCase>(
+      AddOrRemoveFavoriteSongUseCase()
+  );
+
+  sl.registerSingleton<IsFavoritesSongUseCase>(
+      IsFavoritesSongUseCase()
   );
 
 }

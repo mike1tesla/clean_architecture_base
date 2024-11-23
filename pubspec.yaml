@@ -24,6 +24,7 @@ dependencies:
   firebase_auth: ^5.2.0
   dartz: ^0.10.1
   cloud_firestore: ^5.4.0
+  just_audio: ^0.9.42
 
 dev_dependencies:
   flutter_test:

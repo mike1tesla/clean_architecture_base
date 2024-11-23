@@ -43,8 +43,8 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
         password: createUserReq.password,
       );
 
-      // Lưu thông tin người dùng vào collection FirebaseFirestore
-      FirebaseFirestore.instance.collection("Users").add(
+      // Lưu thông tin người dùng vào collection FirebaseFirestore và đặt field ID cho từng Users
+      FirebaseFirestore.instance.collection("Users").doc(data.user?.uid).set(
         {
           'name' : createUserReq.fullName,
           'email' : data.user?.email,

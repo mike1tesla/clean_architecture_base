@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smart_iot/data/models/song/song.dart';
 import 'package:smart_iot/domain/entities/song/song.dart';
 
 abstract class SongFirebaseService {
   Future<Either> getNewsSongs();
   Future<Either> getPlayList();
+  Future<Either> addOrRemoveFavoriteSong(String songId);
+  Future<bool> isFavoritesSong(String songId);
 }
 
 class SongFirebaseServiceImpl extends SongFirebaseService {
@@ -14,10 +17,7 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
     try {
       List<SongEntity> songs = [];
       var data =
-          await FirebaseFirestore.instance.collection('Songs')
-              .orderBy('releaseDate', descending: true)
-              .limit(3)
-              .get();
+          await FirebaseFirestore.instance.collection('Songs').orderBy('releaseDate', descending: true).limit(3).get();
       // Chuyển đổi từ docs songJson -> songModel -> songEntity
       for (var element in data.docs) {
         var songModel = SongModel.fromJson(element.data());
@@ -35,20 +35,73 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
   Future<Either> getPlayList() async {
     try {
       List<SongEntity> songs = [];
-      var data =
-          await FirebaseFirestore.instance.collection('Songs')
-          .orderBy('releaseDate', descending: true)
-          .get();
+      var data = await FirebaseFirestore.instance.collection('Songs').orderBy('releaseDate', descending: true).get();
       // Chuyển đổi từ docs songJson -> songModel -> songEntity
       for (var element in data.docs) {
         var songModel = SongModel.fromJson(element.data());
         songs.add(songModel.toEntity());
       }
-      print(songs);
       return Right(songs);
     } catch (e) {
       print(e);
       return const Left("An error occurred, Please try again");
+    }
+  }
+
+  @override
+  Future<Either> addOrRemoveFavoriteSong(String songId) async {
+    try {
+      final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+      final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+      late bool isFavorites;
+
+      var user = firebaseAuth.currentUser;
+      String uId = user!.uid;
+      // Hàm truy vấn tìm kiếm đã có songId trong collection Favorites chưa
+      QuerySnapshot favoriteSong = await firebaseFirestore.collection('Users').doc(uId)
+          .collection('Favorites')
+          .where(songId, isEqualTo: songId).get();
+      // nếu đã có thì xóa đi, còn thì thêm vào Favorites
+      if (favoriteSong.docs.isNotEmpty) {
+        await favoriteSong.docs.first.reference.delete();
+        isFavorites = false;
+      } else {
+        await firebaseFirestore.collection('Users').doc(uId)
+          .collection('Favorites')
+          .add(
+            {
+              'songId': songId,
+              'addedDate': Timestamp.now()
+            }
+        );
+        isFavorites = true;
+      }
+      return Right(isFavorites);
+    } catch (e) {
+      print(e);
+      return const Left('An error occurred');
+    }
+  }
+
+  @override
+  Future<bool> isFavoritesSong(String songId) async {
+    try {
+      final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+      final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+      var user = firebaseAuth.currentUser;
+      String uId = user!.uid;
+      // Hàm truy vấn tìm kiếm đã có songId trong collection Favorites chưa
+      QuerySnapshot favoriteSong = await firebaseFirestore.collection('Users').doc(uId)
+          .collection('Favorites').where(songId, isEqualTo: songId).get();
+      // Hàm check đã có favoriteSong trong collection chưa, true = yes, false = no
+      if (favoriteSong.docs.isNotEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }
