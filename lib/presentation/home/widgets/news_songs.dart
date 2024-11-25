@@ -6,7 +6,7 @@ import 'package:smart_iot/core/configs/theme/app_colors.dart';
 import 'package:smart_iot/core/constants/app_urls.dart';
 import 'package:smart_iot/presentation/home/bloc/news_songs_cubit.dart';
 import 'package:smart_iot/presentation/home/bloc/news_songs_state.dart';
-import 'package:smart_iot/presentation/song_player/pages/song_layer.dart';
+import 'package:smart_iot/presentation/song_player/pages/song_player.dart';
 
 import '../../../domain/entities/song/song.dart';
 

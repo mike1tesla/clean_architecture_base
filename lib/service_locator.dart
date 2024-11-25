@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:smart_iot/common/bloc/favorite_button/favorite_button_cubit.dart';
 import 'package:smart_iot/data/data_source/auth/auth_firebase_service.dart';
 import 'package:smart_iot/data/data_source/song/song_firebase_service.dart';
 import 'package:smart_iot/data/repository/auth/auth_repo_impl.dart';
@@ -58,5 +59,4 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<IsFavoritesSongUseCase>(
       IsFavoritesSongUseCase()
   );
-
 }

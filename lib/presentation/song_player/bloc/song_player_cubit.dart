@@ -17,21 +17,31 @@ class SongPlayerCubit extends Cubit<SongPlayerState> {
   SongPlayerCubit() : super(SongPlayerLoading()) {
     // Vị trí hiện tại bài hát
     positionSubscription = audioPlayer.positionStream.listen((position) {
-      songPosition = position;
-      updateSongPlayer();
+      if (!isClosed) {
+        songPosition = position;
+        updateSongPlayer();
+      }
+    }, onError: (error) {
+      // Bắt lỗi nếu cần
+      if (!isClosed) emit(SongPlayerFailure());
     });
+
     // Thời lượng bài hát
     durationSubscription = audioPlayer.durationStream.listen((duration) {
-      if (duration != null) {
+      if (!isClosed && duration != null) {
         songDuration = duration;
       }
+    }, onError: (error) {
+      if (!isClosed) emit(SongPlayerFailure());
     });
   }
 
   Future<void> seekToSec(double position) async {
-    final newPosition = Duration(seconds: position.toInt());
-    await audioPlayer.seek(newPosition);
-    emit(SongPlayerLoaded());
+    if (!isClosed) {
+      final newPosition = Duration(seconds: position.toInt());
+      await audioPlayer.seek(newPosition);
+      emit(SongPlayerLoaded());
+    }
   }
 
   void updateSongPlayer() {
@@ -43,9 +53,9 @@ class SongPlayerCubit extends Cubit<SongPlayerState> {
   Future<void> loadSong(String url) async {
     try {
       await audioPlayer.setUrl(url);
-      emit(SongPlayerLoaded());
+      if (!isClosed) emit(SongPlayerLoaded());
     } catch (e) {
-      emit(SongPlayerFailure());
+      if (!isClosed) emit(SongPlayerFailure());
     }
   }
 
@@ -62,7 +72,7 @@ class SongPlayerCubit extends Cubit<SongPlayerState> {
 
   @override
   Future<void> close() {
-    // Hủy các subscription
+    // Hủy các subscription trước khi đóng Cubit
     positionSubscription.cancel();
     durationSubscription.cancel();
     audioPlayer.dispose();

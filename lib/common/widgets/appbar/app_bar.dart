@@ -1,31 +1,38 @@
 import 'package:flutter/material.dart';
 
-class BasicAppBar extends StatelessWidget implements PreferredSizeWidget{
+class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? title;
   final bool hideBack;
+  final Color? backgroundColor;
   final Widget? action;
 
-  const BasicAppBar({super.key, this.title, this.hideBack = false, this.action});
+  const BasicAppBar({
+    super.key,
+    this.title,
+    this.hideBack = false,
+    this.action,
+    this.backgroundColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       leadingWidth: 70,
       elevation: 0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: backgroundColor ?? Colors.transparent,
       centerTitle: true,
       title: title,
       actions: [action ?? Container()],
-      leading: hideBack ? null : IconButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        style: IconButton.styleFrom(
-          backgroundColor: Colors.grey.withOpacity(0.1),
-          minimumSize: const Size(35, 35)
-        ),
-        icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 15),
-      ),
+      leading: hideBack
+          ? null
+          : IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style:
+                  IconButton.styleFrom(backgroundColor: Colors.grey.withOpacity(0.1), minimumSize: const Size(35, 35)),
+              icon: const Icon(Icons.arrow_back_ios_new_outlined, size: 15),
+            ),
     );
   }
 

@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_iot/common/widgets/appbar/app_bar.dart';
+import 'package:smart_iot/common/widgets/favorite_button/favorite_button.dart';
 import 'package:smart_iot/domain/entities/song/song.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_iot/presentation/song_player/bloc/song_player_cubit.dart';
@@ -67,14 +67,7 @@ class SongPlayerPage extends StatelessWidget {
             Text(songEntity.artist, style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14))
           ],
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.favorite_border_outlined,
-            size: 35,
-            color: AppColors.darkGrey,
-          ),
-        )
+        FavoriteButton(songEntity: songEntity),
       ],
     );
   }

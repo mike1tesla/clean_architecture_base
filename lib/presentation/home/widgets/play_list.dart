@@ -1,11 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_iot/common/helpers/is_dark_mode.dart';
 import 'package:smart_iot/core/configs/theme/app_colors.dart';
 import 'package:smart_iot/presentation/home/bloc/play_list_cubit.dart';
 import 'package:smart_iot/presentation/home/bloc/play_list_state.dart';
-import 'package:smart_iot/presentation/song_player/pages/song_layer.dart';
+import 'package:smart_iot/presentation/song_player/pages/song_player.dart';
 
+import '../../../common/widgets/favorite_button/favorite_button.dart';
 import '../../../domain/entities/song/song.dart';
 
 class PlayList extends StatelessWidget {
@@ -13,7 +15,7 @@ class PlayList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<PlayListCubit>(
       create: (context) => PlayListCubit()..getPlayList(),
       child: BlocBuilder<PlayListCubit, PlayListState>(
         builder: (context, state) {
@@ -57,18 +59,20 @@ class PlayList extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => SongPlayerPage(songEntity: songs[index],),
-              ),
-            );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SongPlayerPage(
+                      songEntity: songs[index],
+                    ),
+                  ),
+                );
+              },
+              child: Row(
                 children: [
                   Container(
                     width: 37,
@@ -92,23 +96,16 @@ class PlayList extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(songs[index].duration.toString().replaceAll('.', ':')),
-                  const SizedBox(width: 50),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.favorite_border_outlined,
-                      size: 30,
-                      color: AppColors.darkGrey,
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(songs[index].duration.toString().replaceAll('.', ':')),
+                const SizedBox(width: 50),
+                FavoriteButton(songEntity: songs[index])
+              ],
+            )
+          ],
         );
       },
       separatorBuilder: (BuildContext context, int index) {
