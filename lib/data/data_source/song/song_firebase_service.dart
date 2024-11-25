@@ -1,12 +1,9 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smart_iot/data/models/song/song.dart';
 import 'package:smart_iot/domain/entities/song/song.dart';
-import 'package:smart_iot/domain/usecase/song/isFavoritesSong.dart';
+import 'package:smart_iot/domain/usecase/song/is_favorite_song.dart';
 
 import '../../../service_locator.dart';
 
@@ -15,6 +12,8 @@ abstract class SongFirebaseService {
   Future<Either> getPlayList();
   Future<Either> addOrRemoveFavoriteSong(String songId);
   Future<bool> isFavoritesSong(String songId);
+  Future<Either> getUserFavoriteSong();
+
 }
 
 class SongFirebaseServiceImpl extends SongFirebaseService {
@@ -126,6 +125,32 @@ class SongFirebaseServiceImpl extends SongFirebaseService {
     } catch (e) {
       print(e);
       return false;
+    }
+  }
+
+  @override
+  Future<Either> getUserFavoriteSong() async {
+    try {
+      final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+      final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+      List<SongEntity> favoriteSongs = [];
+      // Hàm truy vấn tìm kiếm đã có songId trong collection Favorites chưa
+      QuerySnapshot favoriteSong = await firebaseFirestore.collection('Users')
+          .doc(firebaseAuth.currentUser!.uid)
+          .collection('Favorites').get();
+      for( var element in favoriteSong.docs ){
+        String songId = element['songId'];
+        var song = await firebaseFirestore.collection('Songs').doc(songId).get();
+
+        SongModel songModel = SongModel.fromJson(song.data()!);
+        SongEntity songEntity = songModel.toEntity();
+
+        favoriteSongs.add(songEntity);
+      }
+      return Right(favoriteSongs);
+    } catch (e) {
+      print(e);
+      return const Left("An error occurred");
     }
   }
 }
