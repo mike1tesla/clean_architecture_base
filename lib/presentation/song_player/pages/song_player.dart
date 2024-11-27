@@ -67,7 +67,10 @@ class SongPlayerPage extends StatelessWidget {
             Text(songEntity.artist, style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14))
           ],
         ),
-        FavoriteButton(songEntity: songEntity),
+        FavoriteButton(
+          key: UniqueKey(),
+          songEntity: songEntity,
+        ),
       ],
     );
   }

@@ -8,8 +8,9 @@ import '../../../service_locator.dart';
 
 class FavoriteButton extends StatelessWidget {
   final SongEntity songEntity;
+  final Function? function;
 
-  const FavoriteButton({super.key, required this.songEntity});
+  const FavoriteButton({super.key, required this.songEntity, this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,11 @@ class FavoriteButton extends StatelessWidget {
         builder: (context, state) {
           if (state is FavoriteButtonInitial) {
             return IconButton(
-              onPressed: () {
-                context.read<FavoriteButtonCubit>().favoriteButtonUpdate(songEntity.songId);
+              onPressed: () async {
+                await context.read<FavoriteButtonCubit>().favoriteButtonUpdate(songEntity.songId);
+                if(function != null){
+                  function!();
+                }
               },
               icon: Icon(
                 songEntity.isFavorite ? Icons.favorite : Icons.favorite_border_outlined,

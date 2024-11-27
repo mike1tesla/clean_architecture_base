@@ -102,7 +102,10 @@ class PlayList extends StatelessWidget {
               children: [
                 Text(songs[index].duration.toString().replaceAll('.', ':')),
                 const SizedBox(width: 50),
-                FavoriteButton(songEntity: songs[index])
+                FavoriteButton(
+                  key: UniqueKey(),
+                  songEntity: songs[index],
+                )
               ],
             )
           ],

@@ -1,6 +1,13 @@
 part of 'favorite_songs_cubit.dart';
 
-@immutable
-sealed class FavoriteSongsState {}
+abstract class FavoriteSongsState {}
 
-final class FavoriteSongsInitial extends FavoriteSongsState {}
+class FavoriteSongsLoading extends FavoriteSongsState {}
+
+class FavoriteSongsLoaded extends FavoriteSongsState {
+  final List<SongEntity> favoriteSongs;
+
+  FavoriteSongsLoaded({required this.favoriteSongs});
+}
+
+class FavoriteSongsFailure extends FavoriteSongsState{}
