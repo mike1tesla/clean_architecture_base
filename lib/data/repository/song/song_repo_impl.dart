@@ -5,7 +5,6 @@ import 'package:smart_iot/domain/repository/song/song_repo.dart';
 import '../../../service_locator.dart';
 
 class SongRepositoryImpl extends SongsRepository {
-
   @override
   Future<Either> getNewsSongs() async {
     return await sl<SongFirebaseService>().getNewsSongs();

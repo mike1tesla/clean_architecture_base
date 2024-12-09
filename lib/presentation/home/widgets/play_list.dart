@@ -101,7 +101,7 @@ class PlayList extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(songs[index].duration.toString().replaceAll('.', ':')),
-                const SizedBox(width: 50),
+                const SizedBox(width: 20),
                 FavoriteButton(
                   key: UniqueKey(),
                   songEntity: songs[index],

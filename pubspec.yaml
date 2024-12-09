@@ -25,6 +25,10 @@ dependencies:
   dartz: ^0.10.1
   cloud_firestore: ^5.4.0
   just_audio: ^0.9.42
+  flutter_dotenv: ^5.2.1
+  google_generative_ai: ^0.4.6
+  equatable: ^2.0.7
+  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -40,7 +44,7 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/vectors/
-
+    - .env
   fonts:
      - family: Satoshi
        fonts:

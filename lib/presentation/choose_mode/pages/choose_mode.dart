@@ -1,8 +1,5 @@
 import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_iot/core/configs/theme/app_colors.dart';
@@ -44,7 +41,7 @@ class ChooseModePage extends StatelessWidget {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             context.read<ThemeCubit>().updateTheme(ThemeMode.dark);
                           },
                           child: ClipOval(
@@ -77,7 +74,7 @@ class ChooseModePage extends StatelessWidget {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             context.read<ThemeCubit>().updateTheme(ThemeMode.light);
                           },
                           child: ClipOval(

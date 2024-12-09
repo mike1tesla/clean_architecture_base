@@ -1,4 +1,4 @@
-// Usecase: Nơi định nghĩa các hoạt động chính của Entity nằm trong Domain
+// Usecase: Nơi THỰC THI các hoạt động chính của Entity nằm trong Domain
 abstract class UseCase<Type, Params> {
 
   //Type: Method trả về generic class kiểu động
