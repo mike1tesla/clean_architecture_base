@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ),
         title: SvgPicture.asset(
           AppVectors.logo,
-          height: 40,
+          height: 120,
         ),
       ),
       body: SingleChildScrollView(
