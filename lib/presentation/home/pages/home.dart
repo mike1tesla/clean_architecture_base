@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     return Scaffold(
       appBar: BasicAppBar(
         hideBack: true,
+        backgroundColor: Colors.green.shade100,
         action: IconButton(
           onPressed: () {
             Navigator.of(context).push(
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ),
         title: SvgPicture.asset(
           AppVectors.logo,
-          height: 120,
+          height: 110,
         ),
       ),
       body: SingleChildScrollView(
@@ -50,18 +51,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _homeTopCard(),
-            _tabs(),
-            SizedBox(
-              height: 230,
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  Container(),
-                  Container(),
-                  Container(),
-                ],
-              ),
-            ),
             const SizedBox(height: 20),
           ],
         ),
@@ -80,25 +69,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ],
         ),
       ),
-    );
-  }
-
-  Widget _tabs() {
-    return TabBar(
-      controller: _tabController,
-      isScrollable: true,
-      physics: const ClampingScrollPhysics(),
-      tabAlignment: TabAlignment.center,
-      labelColor: context.isDarkMode ? Colors.white : Colors.black,
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      indicatorColor: AppColors.primary,
-      dividerColor: Colors.transparent,
-      tabs: const [
-        Text("News", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
-        Text("Video", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
-        Text("Artists", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
-        Text("Podcast", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
-      ],
     );
   }
 }

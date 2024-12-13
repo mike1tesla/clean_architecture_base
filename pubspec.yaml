@@ -29,6 +29,9 @@ dependencies:
   google_generative_ai: ^0.4.6
   equatable: ^2.0.7
   shared_preferences: ^2.2.3
+  font_awesome_flutter: ^10.8.0
+  chart_sparkline: ^1.1.1
+  firebase_database: ^11.1.1
 
 dev_dependencies:
   flutter_test:

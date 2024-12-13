@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_iot/common/helpers/is_dark_mode.dart';
 import 'package:smart_iot/common/widgets/appbar/app_bar.dart';
 import 'package:smart_iot/common/widgets/button/basic_app_button.dart';
-import 'package:smart_iot/core/configs/assets/app_images.dart';
 import 'package:smart_iot/core/configs/assets/app_vectors.dart';
 import 'package:smart_iot/presentation/auth/pages/signin.dart';
 import 'package:smart_iot/presentation/auth/pages/signup.dart';
@@ -25,10 +24,10 @@ class SignupOrSignInPage extends StatelessWidget {
             alignment: Alignment.bottomRight,
             child: SvgPicture.asset(AppVectors.bottomPattern),
           ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Image.asset(AppImages.authBG),
-          ),
+          // Align(
+          //   alignment: Alignment.bottomLeft,
+          //   child: Image.asset(AppImages.authBG,  width: 200,),
+          // ),
           Positioned(
             bottom: MediaQuery.of(context).size.height / 2.5, // Đặt ở dưới cùng
             left: 0,

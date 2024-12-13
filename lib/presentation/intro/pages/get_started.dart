@@ -4,7 +4,9 @@ import 'package:smart_iot/common/widgets/button/basic_app_button.dart';
 import 'package:smart_iot/core/configs/assets/app_images.dart';
 import 'package:smart_iot/core/configs/assets/app_vectors.dart';
 import 'package:smart_iot/presentation/auth/pages/signin.dart';
+import 'package:smart_iot/presentation/auth/pages/signup_or_signin.dart';
 
+import '../../../core/configs/theme/app_colors.dart';
 
 class GetStartedPage extends StatelessWidget {
   const GetStartedPage({super.key});
@@ -16,43 +18,48 @@ class GetStartedPage extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-            width: double.infinity,
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(AppImages.introBG),
-                fit: BoxFit.fill,
-              ),
-            ),
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage(
+                      AppImages.introBG,
+                    ))),
+          ),
+          Container(
+            color: Colors.black.withOpacity(0.4),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 16),
             child: Column(
               children: [
-                SvgPicture.asset(AppVectors.logo),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: SvgPicture.asset(AppVectors.logo),
+                ),
                 const Spacer(),
                 const Text(
-                  'Enjoy listening to music',
-                  style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis enim purus sed phasellus. Cursus ornare id scelerisque aliquam.',
+                  'The technology that touches life.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xFF797979),
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 23),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(
+                  height: 21,
+                ),
+                const Text(
+                  'Smart connectivity, easy device management, optimizing life. The future is in your hands.',
+                  style: TextStyle(fontWeight: FontWeight.w500, color: AppColors.grey, fontSize: 17),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 BasicAppButton(
                     onPressed: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignInPage(),
-                        ),
-                      );
+                          context, MaterialPageRoute(builder: (BuildContext context) => const SignupOrSignInPage()));
                     },
-                    title: "Get started"),
-                const SizedBox(height: 30)
+                    title: 'Get Started'),
+                const SizedBox(height: 30),
               ],
             ),
           ),

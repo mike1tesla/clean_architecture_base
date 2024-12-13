@@ -84,11 +84,11 @@ class _ProfilePageState extends State<ProfilePage> {
             ElevatedButton(
               onPressed: () async {
                 await sl<SignOutUseCase>().call();
-                if (mounted) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
                     builder: (context) => SignInPage(),
-                  ));
-                }
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red, // Màu nền nút
