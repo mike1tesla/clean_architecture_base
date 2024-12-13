@@ -1,16 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_iot/common/helpers/is_dark_mode.dart';
 import 'package:smart_iot/core/configs/assets/app_images.dart';
 import 'package:smart_iot/core/configs/theme/app_colors.dart';
-import 'package:smart_iot/presentation/home/widgets/news_songs.dart';
 import 'package:smart_iot/presentation/profile/pages/profile.dart';
 
 import '../../../common/widgets/appbar/app_bar.dart';
 import '../../../core/configs/assets/app_vectors.dart';
-import '../widgets/play_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -60,7 +56,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  const NewsSongs(),
                   Container(),
                   Container(),
                   Container(),
@@ -68,7 +63,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               ),
             ),
             const SizedBox(height: 20),
-            const PlayList()
           ],
         ),
       ),
