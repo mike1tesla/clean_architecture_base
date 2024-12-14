@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
             BlocBuilder<ProfileCubit, ProfileState>(
               builder: (context, state) {
                 if (state is ProfileLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator(color: Colors.green,));
                 }
                 if (state is ProfileLoaded) {
                   return Column(
@@ -86,7 +86,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 await sl<SignOutUseCase>().call();
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => SignInPage(),
+                    builder: (context) => const SignInPage(),
                   ),
                 );
               },
