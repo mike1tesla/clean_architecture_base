@@ -123,7 +123,6 @@ class _SignInPageState extends State<SignInPage> {
           onTap: _toggle,
           child: Icon(
             _obscureText ? FontAwesomeIcons.eye : FontAwesomeIcons.eyeSlash,
-            color: Colors.black,
             size: 15,
           ),
         ),

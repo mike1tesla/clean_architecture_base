@@ -143,7 +143,7 @@ class ChatBoxPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Gemini Chatbox',
+                    'Chatbox AI',
                     style: TextStyle(color: Colors.green, fontWeight: FontWeight.w600),
                   ),
                   Row(

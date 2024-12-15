@@ -7,6 +7,8 @@ import 'package:smart_iot/core/configs/assets/app_vectors.dart';
 import 'package:smart_iot/presentation/auth/pages/signin.dart';
 import 'package:smart_iot/presentation/auth/pages/signup.dart';
 
+import '../../../core/configs/theme/app_colors.dart';
+
 class SignupOrSignInPage extends StatelessWidget {
   const SignupOrSignInPage({super.key});
 
@@ -41,18 +43,15 @@ class SignupOrSignInPage extends StatelessWidget {
                   SvgPicture.asset(AppVectors.logo),
                   const SizedBox(height: 50),
                   const Text(
-                    "Enjoy listening to music",
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    'The technology that touches life.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'Spotify is a proprietary Swedish audio streaming and media services provider ',
+                    'Smart connectivity, easy device management, optimizing life. The future is in your hands.',
+                    style: TextStyle(fontWeight: FontWeight.w500, color: AppColors.grey, fontSize: 14),
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                    ),
                   ),
                   const SizedBox(height: 30),
                   Row(
@@ -63,7 +62,7 @@ class SignupOrSignInPage extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => SignupPage(),
+                                builder: (context) => const SignupPage(),
                               ),
                             );
                           },
