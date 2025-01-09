@@ -1,10 +1,10 @@
-# smart_iot
+# SPOTITY CLONE
 
-A new Flutter project.
+Spotify Clone is a music streaming app built following the Clean Architecture principles. The app uses Firebase as the backend to manage user authentication, real-time data, and cloud storage,ensuring a seamless and scalable experience. This project emphasizes modularity, maintainability, and a testable approach to mobile app development.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Tech-stack:  Dart, Flutter Bloc/Cubit , Clean Architecture, Firebase, RestAPIs
 
 A few resources to get you started if this is your first Flutter project:
 
